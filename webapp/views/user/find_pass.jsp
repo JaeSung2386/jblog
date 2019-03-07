@@ -13,12 +13,14 @@
 <body>
 	<div class="center-content">
 		<c:import url="/views/include/menu.jsp"/>
-		<form class="login-form" method="post" action="${pageContext.servletContext.contextPath }/user/auth">
-      		<input type="text" name="id" placeholder="id를 입력해주세요.">
-      		<input type="password" name="password" placeholder="password를 입력해주세요.">
-      		<input type="submit" value="로그인">
+		<form class="find-pass-form" method="post" action="${pageContext.servletContext.contextPath }/user/auth">
+      		<div class="center-summary">
+      			<h3>비밀번호 찾기</h3>
+      		</div>
+      		<input type="text" name="name" placeholder="이름을 입력해주세요.">
+      		<input type="text" name="id" placeholder="아이디를 입력해주세요.">
+      		<input type="submit" value="비밀번호 찾기">
 		</form>
-		<c:import url="/views/include/find_info.jsp"/>
 	</div>
 </body>
 </html>

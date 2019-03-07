@@ -49,8 +49,19 @@ public class UserController {
 	// 로그인 ok
 	@RequestMapping("/login")
 	public String login() {
-		System.out.println("로그인 컨트롤러 실행중");
 		return "/user/login";
+	}
+	
+	// id 찾기
+	@RequestMapping("/find_id")
+	public String find_id() {
+		return "/user/find_id";
+	}
+
+	// password 찾기
+	@RequestMapping("/find_pass")
+	public String find_pass() {
+		return "/user/find_pass";
 	}
 	
 //	@ExceptionHandler(UserDaoException.class)

@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>JBlog</title>
-<Link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jblog.css">
+<Link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jblog.css?after">
 </head>
 <body>
 	<div class="center-content">
@@ -24,5 +24,8 @@
 			</fieldset>
 		</form>
 	</div>
+	<c:if test="${empty authuser }">
+		<c:import url="/views/include/find_info.jsp"/>
+	</c:if>
 </body>
 </html>

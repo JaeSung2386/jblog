@@ -11,25 +11,7 @@ public class PageVo {
     private int nextPageNo; // 다음 페이지 번호
     private int finalPageNo; // 마지막 페이지 번호
     private int totalCount; // 게시 글 전체 수
-    private String kwd;
-    private String search;
     
-    public String getKwd() {
-		return kwd;
-	}
-
-	public void setKwd(String kwd) {
-		this.kwd = kwd;
-	}
-
-	public String getSearch() {
-		return search;
-	}
-
-	public void setSearch(String search) {
-		this.search = search;
-	}
-
 	public int getPageSize() {
         return pageSize;
     }
@@ -149,11 +131,11 @@ public class PageVo {
  
         this.setFinalPageNo(finalPage); // 마지막 페이지 번호
     }
+
 	@Override
 	public String toString() {
 		return "PageVo [pageSize=" + pageSize + ", firstPageNo=" + firstPageNo + ", prevPageNo=" + prevPageNo
 				+ ", startPageNo=" + startPageNo + ", pageNo=" + pageNo + ", endPageNo=" + endPageNo + ", nextPageNo="
-				+ nextPageNo + ", finalPageNo=" + finalPageNo + ", totalCount=" + totalCount + ", kwd=" + kwd
-				+ ", search=" + search + "]";
+				+ nextPageNo + ", finalPageNo=" + finalPageNo + ", totalCount=" + totalCount + "]";
 	}
 }

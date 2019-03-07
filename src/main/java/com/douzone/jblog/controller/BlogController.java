@@ -105,10 +105,14 @@ public class BlogController {
 			@ModelAttribute BlogVo blogVo,
 			@RequestParam(value="logo-file") MultipartFile multipartFile,
 			@PathVariable(value="user_id") String user_id) {
+		
 		String logo = fileuploadService.restore(multipartFile);
+		
 		blogVo.setUser_no(blogService.getNo(user_id));
 		blogVo.setLogo(logo);
+		
 		blogService.update(blogVo);
+		
 		return "redirect:/" + user_id + "/admin/basic";
 	}
 	
@@ -116,8 +120,22 @@ public class BlogController {
 	public String ajax(
 			Model model,
 			@PathVariable(value="user_id") String user_id) {
+		
 		model.addAttribute("blogVo", blogService.getBlog(user_id));
+		
 		return "jblog/blog-admin-category";
+	}
+	
+	@ResponseBody
+	@RequestMapping("/{categoryNo}/{postVo.no}/commentlist")
+	public JSONResult commentlist(
+			@PathVariable(value="user_id") String user_id,
+			@PathVariable(value="categoryNo") Long categoryNo,
+			@PathVariable(value="postVo.no") Long postNo) {
+		System.out.println("commentlist postNo: " + postNo);
+		List<CommentVo> list = blogService.getComment(postNo);
+		System.out.println(list);
+		return JSONResult.success(list);
 	}
 	
 	// 관리자 페이지 카테고리 view ok
@@ -125,7 +143,9 @@ public class BlogController {
 	@RequestMapping("/admin/category/list")
 	public JSONResult category(
 			@PathVariable(value="user_id") String user_id) {
+		
 		List<CategoryVo> list = blogService.getCategory(user_id);
+		
 		return JSONResult.success(list);
 	}
 	
@@ -135,25 +155,31 @@ public class BlogController {
 	public JSONResult categoryInsert(
 			@RequestBody CategoryVo categoryVo,
 			@PathVariable(value="user_id") String user_id) {
+		
 		categoryVo.setUser_no(blogService.getNo(user_id));
+		
 		return JSONResult.success(blogService.insert(categoryVo));
 	}
 	
 	// 관리자 페이지 카테고리 delete ok
-		@ResponseBody
-		@RequestMapping(value = "/admin/category/delete", method=RequestMethod.POST)
-		public JSONResult categoryDelete(
-				@RequestParam (value="no", required=true) long no,
-				@PathVariable(value="user_id") String user_id) {
-			return JSONResult.success(blogService.delete(no));
-		}
+	@ResponseBody
+	@RequestMapping(value = "/admin/category/delete", method=RequestMethod.POST)
+	public JSONResult categoryDelete(
+			@RequestParam (value="no", required=true) long no,
+			@PathVariable(value="user_id") String user_id) {
+		
+		return JSONResult.success(blogService.delete(no));
+	}
+	
 	// 관리자 페이지 게시글 작성 view ok
 	@RequestMapping("/admin/write")
 	public String write(
 			Model model,
 			@PathVariable(value="user_id") String user_id) {
+		
 		model.addAttribute("blogVo", blogService.getBlog(user_id));
 		model.addAttribute("categorylist", blogService.getCategory(user_id));
+		
 		return "jblog/blog-admin-write";
 	}
 	
@@ -163,9 +189,11 @@ public class BlogController {
 			@ModelAttribute PostVo postVo,
 			@RequestParam(value="category") String category_name,
 			@PathVariable(value="user_id") String user_id) {
-		//model.addAttribute("blogVo", siteService.get());
+		
 		postVo.setCategory_no(blogService.getCategoryNo(blogService.getNo(user_id), category_name));
+		
 		blogService.insert(postVo);
+		
 		return "redirect:/" + user_id;
 	}
 	
@@ -173,12 +201,12 @@ public class BlogController {
 	public String commentWrite(
 			@ModelAttribute CommentVo commentVo,
 			@RequestParam (value="post_no", required=true) long post_no,
-			@PathVariable(value="user_id") String user_id
-			) {
-		System.out.println("댓글 쓰기");
+			@PathVariable(value="user_id") String user_id) {
+		
 		commentVo.setPost_no(post_no);
-		System.out.println(commentVo);
+		
 		blogService.commentInsert(commentVo);
+		
 		return "redirect:/" + user_id;
 	}
 	

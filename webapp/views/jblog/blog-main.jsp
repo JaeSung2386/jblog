@@ -8,6 +8,73 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>JBlog</title>
 <Link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jblog.css">
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.9.0.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+/* 댓글 추가, 삭제 ajax 구현 예정 */
+var messageBox = function(title, message){
+	$("#dialog-message").attr("title", title);
+	$("#dialog-message p").text(message);
+	$("#dialog-message").dialog({
+		modal: true,
+		buttons: {
+			"확인": function(){
+				$(this).dialog("close");
+			}
+		}
+	});
+}
+
+var render = function(vo, mode){
+	var htmls = 
+			"<table class='tbl-ex'>" +
+				"<tr data-no='" + vo.no + "'>" +
+					"<td>" + vo.reg_date + "</td>" +
+					"<td>" + 
+						"<a href=''>" + "삭제" + "</a>" + 
+					"</td>" +
+				"</tr>" +
+				"<tr>" +
+					"<td>" +
+						"<div class='view-content'>" + vo.content + "</div>" +
+					"</td>" +
+				"</tr>" +
+			"</table>";
+	if( mode == true ){
+		$("#list-comment").append(htmls);	// 맨 뒤
+	} else {
+		$("#list-comment").prepend(htmls); // 맨 처음
+	}
+}
+
+var fetchList = function(){
+	console.log("fetchList 실행");
+	$.ajax({
+		url: "${pageContext.request.contextPath }/${id}/${categoryNo}/${postVo.no}/commentlist",
+		type: "get",
+		dataType: "json",
+		data: "",
+		success: function(response) {
+			if(response.result == "fail") {
+				console.warn(response.message);
+				return;
+			}
+			// rendering
+			$.each(response.data, function(index, vo) {
+				render(vo, true);
+			})
+		},
+		error: function(xhr, status, e) {
+			console.error(status + ":" + e);
+		}
+	});		
+}
+$(function(){
+	// 최초 리스트 가져오기
+	fetchList();
+});
+</script>
 </head>
 <body>
 	<div id="container">
@@ -26,26 +93,8 @@
 				<h1>게시글이 존재하지 않습니다. </h1>
 			</c:if>
 			
-			<c:forEach items="${commentlist }" var="vo" >
-			<c:if test="${postVo.no eq vo.post_no }">
-			<table class="tbl-ex">
-				<tr>
-					<td>
-						${vo.reg_date }
-					</td>
-					<td>
-						<!-- 삭제 미구현 -->
-						<a href="">삭제</a>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<div class="view-content">${vo.content } </div>
-					</td>
-				</tr>
-			</table>
-			</c:if>
-			</c:forEach>
+			<div id="list-comment"></div>
+		
 			<c:if test="${!empty postVo }">
 			<div id="board">
 				<form class="board-form" method="post" action="${pageContext.servletContext.contextPath }/${id }/comment/write">

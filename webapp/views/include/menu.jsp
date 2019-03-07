@@ -3,7 +3,13 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<h1 class="logo">JBlog</h1>
+
+<h1 class="logo">
+	<a href="${pageContext.servletContext.contextPath }">
+		<img src="${pageContext.request.contextPath }/assets/images/naver.jpg">
+	</a>
+</h1>
+
 <ul class="menu">
 	<li><a href="${pageContext.servletContext.contextPath }">메인</a></li>
 	<c:if test="${authuser.no eq null }">

@@ -7,7 +7,8 @@
 	<h1>${blogVo.title }</h1>
 	<ul>
 		<li>
-			<a href="${pageContext.servletContext.contextPath }/${authuser.id }">블로그메인</a>
+			<a href="${pageContext.servletContext.contextPath }/${id }">${id }의 블로그메인</a>
+			<a href="${pageContext.servletContext.contextPath }">JBlog 메인</a>
 		</li>
 		<c:if test="${authuser.no eq null }">
 			<li>
