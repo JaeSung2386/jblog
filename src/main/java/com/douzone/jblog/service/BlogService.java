@@ -35,8 +35,6 @@ public class BlogService {
 	private CommentDao commentDao;
 	
 	public List<CommentVo> getComment(long post_no) {
-		System.out.println("commentDao");
-		System.out.println(commentDao.getList(post_no));
 		return commentDao.getList(post_no);
 	}
 	

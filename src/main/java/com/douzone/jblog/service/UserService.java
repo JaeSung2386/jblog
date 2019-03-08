@@ -43,11 +43,16 @@ public class UserService {
 		}
 	}
 	
-	public UserVo getUser( String email, String password ) {
-		return userDao.get( email, password );
+	public UserVo getUser( String id, String password ) {
+		return userDao.get( id, password );
 	}
 	
 	public UserVo getUser(long no) {
 		return userDao.get(no);
+	}
+	
+	public boolean existEmail( String id ) {
+		UserVo userVo = userDao.get( id );
+		return userVo != null;
 	}
 }

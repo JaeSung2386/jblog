@@ -14,6 +14,9 @@
 	<div class="center-content">
 		<c:import url="/views/include/menu.jsp"/>
 		<form class="login-form" method="post" action="${pageContext.servletContext.contextPath }/user/auth">
+      		<div class="center-summary">
+      			<h3>로그인</h3>
+      		</div>
       		<input type="text" name="id" placeholder="id를 입력해주세요.">
       		<input type="password" name="password" placeholder="password를 입력해주세요.">
       		<input type="submit" value="로그인">

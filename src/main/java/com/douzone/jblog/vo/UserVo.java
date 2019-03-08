@@ -11,17 +11,15 @@ public class UserVo {
 	
 	@NotEmpty
 	@Length(min=2, max=8)
-	private String name;
+	private String password;	
 	
 	@NotEmpty
 	@Length(min=2, max=8)
-	private String password;	
-
+	private String name;
+	private String email;
+	private String phone;
 	private String join_date;
 	
-	private String email;
-	private String gender;
-	private String role;
 	
 	public long getNo() {
 		return no;
@@ -53,30 +51,23 @@ public class UserVo {
 	public void setJoin_date(String join_date) {
 		this.join_date = join_date;
 	}
-	
-	public String getRole() {
-		return role;
-	}
-	public void setRole(String role) {
-		this.role = role;
-	}
 	public String getEmail() {
 		return email;
 	}
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getGender() {
-		return gender;
+	public String getPhone() {
+		return phone;
 	}
-	public void setGender(String gender) {
-		this.gender = gender;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
+	
 	@Override
 	public String toString() {
-		return "UserVo [no=" + no + ", id=" + id + ", name=" + name + ", password=" + password + ", join_date="
-				+ join_date + ", email=" + email + ", gender=" + gender + ", role=" + role + "]";
+		return "UserVo [no=" + no + ", id=" + id + ", password=" + password + ", name=" + name + ", email=" + email
+				+ ", phone=" + phone + ", join_date=" + join_date + "]";
 	}
-
 	
 }

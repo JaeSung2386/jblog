@@ -6,7 +6,7 @@
 
 <h1 class="logo">
 	<a href="${pageContext.servletContext.contextPath }">
-		<img src="${pageContext.request.contextPath }/assets/images/naver.jpg">
+		<h1>JBlog</h1>
 	</a>
 </h1>
 
@@ -17,7 +17,7 @@
 		<li><a href="${pageContext.servletContext.contextPath }/user/join">회원가입</a></li>
 	</c:if>
 	<c:if test="${authuser.no ne null }">
-		<li><a href="${pageContext.servletContext.contextPath }/${authuser.id}">내블로그</a></li>
+		<li><a href="${pageContext.servletContext.contextPath }/${authuser.id}">내 블로그</a></li>
 		<li><a href="${pageContext.servletContext.contextPath }/user/logout">로그아웃</a></li>			
 	</c:if>
 </ul>

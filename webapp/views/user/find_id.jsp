@@ -18,6 +18,8 @@
       			<h3>아이디 찾기</h3>
       		</div>
       		<input type="text" name="name" placeholder="이름을 입력해주세요.">
+      		<input type="text" name="email" placeholder="E-mail울 입력해주세요.">
+      		<input type="text" name="phone" placeholder="전화번호를 입력해주세요.">
       		<input type="submit" value="확인">
 		</form>
 	</div>

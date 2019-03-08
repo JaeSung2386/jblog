@@ -53,6 +53,7 @@ public class PostDao {
 		
 		map.put("user_no", user_no);
 		map.put("category_no", category_no);
+		
 		return sqlSession.selectOne("post.getPost", map);
 	}
 	

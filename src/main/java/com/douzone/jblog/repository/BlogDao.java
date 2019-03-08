@@ -17,6 +17,7 @@ public class BlogDao {
 	}
 	
 	public BlogVo get(long user_no) {
+		System.out.println("블로그 DAO " + user_no);
 		return sqlSession.selectOne("blog.get", user_no);
 	}
 	

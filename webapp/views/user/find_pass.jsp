@@ -17,8 +17,10 @@
       		<div class="center-summary">
       			<h3>비밀번호 찾기</h3>
       		</div>
-      		<input type="text" name="name" placeholder="이름을 입력해주세요.">
       		<input type="text" name="id" placeholder="아이디를 입력해주세요.">
+      		<input type="text" name="name" placeholder="이름을 입력해주세요.">
+      		<input type="text" name="email" placeholder="E-mail울 입력해주세요.">
+      		<input type="text" name="phone" placeholder="전화번호를 입력해주세요.">
       		<input type="submit" value="비밀번호 찾기">
 		</form>
 	</div>

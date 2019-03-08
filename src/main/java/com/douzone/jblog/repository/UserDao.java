@@ -30,7 +30,7 @@ public class UserDao {
 			conn = getConnection();
 
 			String sql = 
-				" select no, name, id" + 
+				" select no, name, id, email, phone" + 
 				"   from user" + 
 				"  where no=?";
 			pstmt = conn.prepareStatement(sql);
@@ -79,7 +79,7 @@ public class UserDao {
 			conn = getConnection();
 
 			String sql = 
-				" select no, name " + 
+				" select no, name, id, email, phone " + 
 				"   from user" + 
 				"  where id=?";
 			pstmt = conn.prepareStatement(sql);
@@ -128,7 +128,7 @@ public class UserDao {
 			conn = getConnection();
 
 			String sql = 
-				" select no, name, id" + 
+				" select no, id, name, email, phone" + 
 				"   from user" + 
 				"  where id=?" +
 				"    and password=?";
@@ -140,12 +140,16 @@ public class UserDao {
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				long no = rs.getLong(1);
-				String name = rs.getString(2);
+				String name = rs.getString(3);
+				String email = rs.getString(4);
+				String phone = rs.getString(5);
 				
 				result = new UserVo();
 				result.setNo(no);
+				result.setId(rs.getString(2));
 				result.setName(name);
-				result.setId(rs.getString(3));
+				result.setEmail(email);
+				result.setPhone(phone);
 			}
 		} catch (SQLException e) {
 			System.out.println("error :" + e);
